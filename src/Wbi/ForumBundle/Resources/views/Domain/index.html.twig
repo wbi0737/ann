@@ -1,0 +1,96 @@
+{% extends "WbiForumBundle::layout.html.twig" %}
+
+{% block wbiforum_body %}
+
+<div class="span9">
+    <div class="row" id="section1">
+        <div class="page-header">
+             <div class="hero-unit"><h2>Liste des Produits les plus vendus</h2>
+
+                 <blockquote><p class="text-info">Négociez le prix avec le vendeur</p>
+                    <small>Avec les membres les plus célèbre en informatique..</small></blockquote>
+
+            </div>
+       </div>
+            <div class="row" id="section2">
+                <div class="span9"></div>
+            </div>  
+    
+            <article>
+                <button class="btn btn-large btn-block btn-inverse" type="button"><a href="{{ path('posts_new' )}}">Ajouter une annonce gratuite</a></button>
+            </article>
+         
+            
+     {% for domain in entities %}
+          <div class="span3">
+            <div id="cadre-box">
+                <div id="title-domain" class="text-center"><strong>{{ domain.label }}</strong></div>
+                <div id="list-underdomain">    
+                    <ul class="unstyled">
+                        {% for underdomain in domain.underdomains %}
+                            
+                         <div id="">
+                            <li><a href="{{ path('underdomain_show', { 'id': underdomain.id }) }}">{{ underdomain.label }}</a></li>
+                         </div>
+                                
+                        {% endfor %}
+                    </ul>
+                </div>
+        </div>
+      </div>
+              
+    {% endfor %}
+   </div>  
+
+</div> 
+        
+    
+<style type="text/css">
+#title-domain{
+padding-left: 5px;
+background-color: rgba(35, 28, 204, 0.61);
+color: rgb(255, 255, 255);
+height: 32px;
+padding-top: 10px;
+}
+#cadre-box{
+background-color:  rgb(255, 255, 255);
+border: solid 1px;
+width: 266px;
+height: 199px;
+border-radius: 5px;
+box-shadow: 0px 2px 5px rgb(163, 163, 185);
+margin-bottom: 30px;
+}
+#section1{
+border-radius: 10px;
+box-shadow: 4px 18px 18px rgb(163, 163, 185);
+border: 2px;
+padding-bottom: 30px;
+}
+article{
+moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+width: 254px;
+height: 400px;
+background-color: #fff;
+border: 1px solid rgb(188, 18, 241);
+float: right;
+margin-right: 5px;
+}
+#section2{
+border: solid 1px;
+height: 120px;
+width: 1135px;
+margin-left: 32px;
+margin-bottom: 20px;
+border-radius: 10px;
+box-shadow: 4px 18px 18px rgb(163, 163, 185);
+border: 1px solid rgb(188, 18, 241);
+}
+#list-underdomain{
+padding-top: 5px;
+padding-left: 10px;
+}
+    </style>            
+             {% endblock %}

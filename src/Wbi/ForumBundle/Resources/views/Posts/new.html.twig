@@ -1,0 +1,65 @@
+{% extends "WbiForumBundle::layout.html.twig" %}
+
+{% block wbiforum_body %}
+<div class="span9">
+<h2>Ajouter Votre Annonce</h2>
+
+<form class="well" action="{{ path('posts_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button class="btn btn-primary" type="submit">Create</button>
+    </p>
+</form>
+
+
+</div>
+
+<script type="text/javascript">
+
+  
+       
+    $("#wbi_forumbundle_poststype_domain").change(function() {
+        console.log('change');   
+        $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url:  '{{ path('get_underdomain') }}',
+                data: 'domain_id=' + $(this).val(),
+                success: function(response)
+                {
+                    $('#wbi_forumbundle_poststype_underdomain').find("option").remove();
+                
+                    $.each(response, function(i, item) {
+                        $('#wbi_forumbundle_poststype_underdomain').append(new Option(item, i));
+                    });
+                    $('#wbi_forumbundle_poststype_underdomain').css('width', '150px');
+                    
+                    
+                    
+                }
+            });
+                     
+   });
+   
+   $("#wbi_forumbundle_poststype_underdomain").change(function() {
+            console.log('change');   
+            $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url:  '{{ path('get_type') }}',
+                    data: 'underdomain_id=' + $(this).val(),
+                    success: function(response)
+                    {
+                        $('#wbi_forumbundle_poststype_type').find("option").remove();
+                        $.each(response, function(i, item) {
+                            $('#wbi_forumbundle_poststype_type').append(new Option(item, i));
+                        });
+                        $('#wbi_forumbundle_poststype_type').css('width', '150px');
+                    }
+                });    
+
+       }); 
+         
+   
+    </script>
+ {% endblock %}

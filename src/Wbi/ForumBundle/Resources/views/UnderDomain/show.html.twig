@@ -1,0 +1,47 @@
+{% extends "WbiForumBundle::layout.html.twig" %}
+
+{% block wbiforum_body %}
+<div class="span9">
+    <ul class="breadcrumb">
+        <li><a href="#"></a> <span class="divider">/</span></li>
+        <li><a href="#"></a> <span class="divider">/</span></li>
+        <li class="active">Articles</li>
+     </ul>
+
+<table class="table table-hover table-bordered table-condensed">
+  <caption><h4>Liste des Voitures</h4></caption>
+  <thead>
+    <tr>
+      <th>Annonce</th>
+      <th>Modele</th>
+      <th>Marque</th>
+      <th>Région</th>
+      <th>Prix</th>
+    </tr>
+  </thead>
+ 
+  <tbody>
+  
+{% for type in entity.types %}
+   {% for post in type.posts %}
+  
+    <tr>
+      <td>{{post.postTitle}}</td>
+      <td>{{post.type.underdomain.label}}</td>
+      <td>{{post.type.labeltype}}</td>
+      <td>{{post.postVille}}</td>
+      <td>{{post.postPrice}}</td>
+    </tr>
+
+    {% endfor %}
+{% endfor %}
+     
+    
+  </tbody>
+
+  	
+</table>
+<div id="page_navigation"></div> 
+ </div>     
+
+{% endblock %}
